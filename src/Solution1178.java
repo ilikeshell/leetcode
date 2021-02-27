@@ -32,16 +32,16 @@ public class Solution1178
     {
         int count = 0;
 
-        for (int i = 1; i < 1 << (str.length() - 1); i++)
+        for (int i = 0; i < (1 << (str.length() - 1)); i++)
         {
-            int key =  1 << (str.charAt(0) - 'a');
-            for (int j = 0; j < str.length(); j++)
+            int key =  1 << str.charAt(0) - 'a';
+            for (int j = 1; j < str.length(); j++)
             {
-                if((i >> j & 1) == 1)
-                    key |= 1 << (str.charAt(j) - 'a');
-                if(map.containsKey(key))
-                    count += map.get(key);
+                if(((i >> (j-1)) & 1) == 1)
+                    key |= (1 << (str.charAt(j) - 'a'));
             }
+            if(map.containsKey(key))
+                count += map.get(key);
         }
         return count;
     }
@@ -59,7 +59,7 @@ public class Solution1178
         List<Integer> results = new ArrayList<>();
         for (String p: puzzles)
         {
-            results.add(getCnt(wordsMap, p));
+            results.add(getCount(wordsMap, p));
         }
         return results;
     }
