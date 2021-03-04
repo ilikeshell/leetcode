@@ -4,43 +4,81 @@ public class Solution15
 {
     public static void main(String[] args)
     {
-        //int[] nums = {0,0,0,0};
-        int[] nums = {-1,0,1,2,-1,-4};
+        //int[] nums = {0,0,0,0,0};
+        //int[] nums = {-1,0,1,2,-1,-4};
+        //int[] nums = {-2,0,1,1,2};
+        int[] nums = {-4,-2,1,-5,-4,-4,4,-2,0,4,0,-2,3,1,-5,0};
         for(List<Integer> e : new Solution15().threeSum(nums))
             System.out.print(e.toString() + " ");
     }
+
     public List<List<Integer>> threeSum(int[] nums)
     {
         Arrays.sort(nums);
         List<List<Integer>> ret = new ArrayList<>();
-        for (int i = 0; i < nums.length; i++)
+
+        for (int i = 0; i < nums.length - 2; i++)
         {
-            if(i - 1 >= 0 && nums[i] == nums[i-1])
+            /** 第一个数去重 */
+            if(i > 0 && nums[i] == nums[i-1])
                 continue;
-            for (int j = i + 1, k = nums.length - 1; j < k; j++)
+
+            /** 左右两个指针用来寻找第二个和第三个数 */
+            int left = i + 1;
+            int right = nums.length - 1;
+
+            while (left < right)
             {
-                if(nums[j] + nums[i] > 0)
-                    break;
+                /** 第一个数和第二个数的组合去重 */
+                /*if (ret.size() > 0)
+                {
+                    List<Integer> lastArray = ret.get(ret.size() - 1);
+                    if (ret.size() > 0 && lastArray.get(0) == nums[i] && lastArray.get(1) == nums[left])
+                        continue;
+                }
+                    */
 
-                if(j + 1 < k && nums[j] == nums[j+1])
-                    continue;
+                /** 左右去重   例如:[-2, 0, 0, 0, 1, 1]  i->-2, left->0, right->1
+                 *        这种方式去重的话，会漏掉[-2,1,1]这个组合，因为最后一个1被去重去
+                 * 掉了。所以这种方式是错误的，因为被去重的数字还有可能参与这个三元组的。
+                 * */
+                /*while(nums[left] == nums[left + 1] && left + 1 < right)
+                    left++;
+                while (nums[right] == nums[right - 1] && right - 1 > left)
+                    right--;
 
-                int sum = nums[i] + nums[j] + nums[k];
+                if(left >= right)
+                    break;*/
 
+                int sum = nums[i] + nums[left] + nums[right];
+
+                /** 和等于0， 添加三个数到结果，同时收缩左右两指针 */
                 if(sum == 0)
                 {
                     ArrayList<Integer> result = new ArrayList<>();
                     result.add(nums[i]);
-                    result.add(nums[j]);
-                    result.add(nums[k]);
+                    result.add(nums[left]);
+                    result.add(nums[right]);
                     ret.add(result);
-                    k--;
-                }
+
+                    /** 正确的去重方式，left和right指向的元素已经明确加入了结果集，所以left
+                     * 指针右边相同的元素要被去除，同理，right指针右边的重复元素要被去除
+                     * */
+                    while(nums[left] == nums[left + 1] && left + 1 < right)
+                        left++;
+                    while (nums[right] == nums[right - 1] && right - 1 > left)
+                        right--;
+
+                    /** 同时收缩左右指针 */
+                    left++;
+                    right--;
+                } /** 和大于0， 收缩右指针 */
                 else if(sum > 0)
                 {
-                    k--;
-                    j--;
-                }
+                    right--;
+                } /** 和小于0， 收缩左指针 */
+                else
+                    left++;
             }
         }
         return ret;
