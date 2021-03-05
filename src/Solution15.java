@@ -7,7 +7,8 @@ public class Solution15
         //int[] nums = {0,0,0,0,0};
         //int[] nums = {-1,0,1,2,-1,-4};
         //int[] nums = {-2,0,1,1,2};
-        int[] nums = {-4,-2,1,-5,-4,-4,4,-2,0,4,0,-2,3,1,-5,0};
+        //int[] nums = {-4,-2,1,-5,-4,-4,4,-2,0,4,0,-2,3,1,-5,0};
+        int[] nums = {0,0,0};
         for(List<Integer> e : new Solution15().threeSum(nums))
             System.out.print(e.toString() + " ");
     }
@@ -64,9 +65,9 @@ public class Solution15
                     /** 正确的去重方式，left和right指向的元素已经明确加入了结果集，所以left
                      * 指针右边相同的元素要被去除，同理，right指针右边的重复元素要被去除
                      * */
-                    while(nums[left] == nums[left + 1] && left + 1 < right)
+                    while(left + 1 < nums.length && nums[left] == nums[left + 1])
                         left++;
-                    while (nums[right] == nums[right - 1] && right - 1 > left)
+                    while (right - 1 > 0 && nums[right] == nums[right - 1])
                         right--;
 
                     /** 同时收缩左右指针 */
