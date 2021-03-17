@@ -99,7 +99,7 @@ public class PostfixExpDemo
         postfixExp = postfixExp.trim();
 
         String[] tokens = postfixExp.split("\\s+");
-        int sum = 0;
+
         for(String token : tokens)
         {
             if(token.matches("[\\u002b\\u002d\\u002a\\u002f]"))
