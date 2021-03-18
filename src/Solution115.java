@@ -15,7 +15,6 @@ public class Solution115
         return count;
     }
 
-
     public static void backtracking(String s, String t, int sIndex, int tIndex)
     {
         if(t.length() - tIndex > s.length() - sIndex)
@@ -27,14 +26,14 @@ public class Solution115
             return;
         }
 
-        String key = sIndex + "&" + tIndex;
+        /*String key = sIndex + "&" + tIndex;
         if(map.containsKey(key))
         {
             count += map.get(key);
             return;
         }
 
-        int count_pre = count;
+        int count_pre = count;*/
 
         for (int i = sIndex; i < s.length() - t.length() + 1 + tIndex; i++)
         {
