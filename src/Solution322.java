@@ -21,9 +21,15 @@ public class Solution322
             int ret = Integer.MAX_VALUE;
             for (int j = 0; j < coins.length; j++)
             {
+                /** 最后一枚硬币不能大于i的面额， i - coins[j]的面额能够拼出来*/
                 if(i >= coins[j] && dp[i - coins[j]] != Integer.MAX_VALUE)
                     /** 这种方式错误 */
                     //ret = Math.min(dp[i - coins[j]], ret) + 1;
+                    /** if(i >= coins[j] && dp[i - coins[j]] != Integer.MAX_VALUE
+                     *                          && dp[i - coins[j]] + 1 < ret)
+                     *      ret = dp[i - coins[j]] + 1；
+                     *      可以替换为上述写法
+                     */
                     ret = Math.min(dp[i - coins[j]] + 1, ret) ;
             }
             dp[i] = ret;
