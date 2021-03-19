@@ -6,9 +6,37 @@ public class Solution322
     {
         //int[] coins = {1,2,5};
         int[] coins = {1};
-        System.out.println(new Solution322().coinChange(coins, 2));
+        System.out.println(new Solution322().coinChange1(coins, 2));
     }
-    public int coinChange(int[] coins, int amount)
+    /**
+     * 动态规划版本
+     */
+    public static int coinChange(int[] coins, int amount)
+    {
+        int[] dp = new int[amount + 1];
+        dp[0] = 0;
+
+        for (int i = 1; i < dp.length; i++)
+        {
+            int ret = Integer.MAX_VALUE;
+            for (int j = 0; j < coins.length; j++)
+            {
+                if(i >= coins[j] && dp[i - coins[j]] != Integer.MAX_VALUE)
+                    /** 这种方式错误 */
+                    //ret = Math.min(dp[i - coins[j]], ret) + 1;
+                    ret = Math.min(dp[i - coins[j]] + 1, ret) ;
+            }
+            dp[i] = ret;
+        }
+
+        return dp[amount] == Integer.MAX_VALUE ? -1 : dp[amount];
+    }
+
+    /**
+     * 递归版本版本
+     */
+
+    public int coinChange1(int[] coins, int amount)
     {
         int[] dp = new int[amount + 1];
         Arrays.fill(dp, Integer.MIN_VALUE);
