@@ -53,6 +53,10 @@ public class Solution403
 
     public static boolean canCross(int[] stones)
     {
+
+    }
+    public static boolean canCross1(int[] stones)
+    {
         boolean[] dp = new boolean[stones.length];
         dp[0] = true;
         int k = 0;
