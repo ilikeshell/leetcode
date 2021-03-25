@@ -64,6 +64,7 @@ public class Solution456
     /**
      *  体会单调栈的作用
      *   时间复杂度为O(n)
+     *   单调栈 ➕ 逆序 时间复杂度 O（n） 单调栈似乎适合解决这种有个山峰极值的情况
      *   用例：
      *   [1,2,3,4]
      *   [3,1,4,2]
@@ -78,20 +79,20 @@ public class Solution456
         /** 栈，用于保存一个单调递减的序列（从底部开始） */
         Stack<Integer> s = new Stack<Integer>();
 
-        /** top保存的值仅小于栈顶的值，但是位置大于栈顶值 */
-        int top = Integer.MIN_VALUE;
+        /** twoElement保存的值仅小于栈顶的值，但是位置大于栈顶值 */
+        int twoElement = Integer.MIN_VALUE;
 
         /** 从后往前扫描每个数字 */
         for (int i = nums.length - 1; i >= 0; i--)
         {
             /** 找到一个结果，程序结束 */
-            if(nums[i] < top) return true;
+            if(nums[i] < twoElement) return true;
 
             /** 如果栈不为空，弹出栈中所有小于nums[i]的元素 */
             while(!s.isEmpty() && nums[i] > s.peek())
-                /** top中保存原来栈中最后一个比nums[i]小的元素*/
-                top = s.pop();
-                
+                /** twoElement中保存原来栈中最后一个比nums[i]小的元素*/
+                twoElement = s.pop();
+
             /** 栈中已经没有比nums[i]最小的元素，nums[i]就是栈中最小的元素
              * 单调栈
              */
