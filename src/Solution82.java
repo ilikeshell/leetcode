@@ -26,6 +26,7 @@
  * }
  */
 class Solution82 {
+    /**  方法1: 不使用哑节点 */
     public ListNode deleteDuplicates(ListNode head)
     {
         if (head == null)
@@ -69,6 +70,32 @@ class Solution82 {
             }
         }
         return head;
+    }
+
+    /**  方法2: 使用哑节点 */
+    public ListNode deleteDuplicates2(ListNode head)
+    {
+        if (head == null)
+            return null;
+
+        ListNode dummyP = new ListNode(0, head);
+        ListNode curP = dummyP;
+        ListNode moveP;
+
+        while(curP.next != null && curP.next.next != null)
+        {
+            if(curP.next.val == curP.next.next.val)
+            {
+                moveP = curP.next;
+                while(moveP.next != null && moveP.val == moveP.next.val)
+                    moveP = moveP.next;
+                curP.next = moveP.next;
+            }
+            else
+                curP = curP.next;
+        }
+
+        return dummyP.next;
     }
 }
 //leetcode submit region end(Prohibit modification and deletion)
