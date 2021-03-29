@@ -14,7 +14,7 @@ public class Solution338
         ret[0] = 0;
         for (int i = 1; i <= num; i++)
         {
-            // i&1相当于i%２，但前者要快得多；　ｉ＞＞１相当于ｉ／２
+            // i&1相当于i%２，但前者要快得多；　i>>1相当于i/2
             ret[i] = (i&1) + ret[i>>1];
         }
 
