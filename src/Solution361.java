@@ -1,7 +1,15 @@
 public class Solution361
 {
+    public static void main(String[] args)
+    {
+        char[][] grid = {
+                {'0','E','0','0'},{'E','0','W','E'},{'0','E','0','0'}
+        };
+
+        System.out.println(maxKilledEnemies1(grid));
+    }
     /** 计算错误 */
-    public int maxKilledEnemies1(char[][] grid)
+    public static int maxKilledEnemies1(char[][] grid)
     {
         if(grid == null || grid.length == 0 || grid[0].length == 0)
             return 0;
@@ -12,7 +20,9 @@ public class Solution361
         int[][] upAndLeft = new int[m][n];
         int[][] downAndRight = new int[m][n];
 
-
+        // {'0','E','0','0'},
+        // {'E','0','W','E'},
+        // {'0','E','0','0'}
         int res = 0;
         for (int i = 0; i < m; i++)
             for (int j = 0; j < n; j++)
@@ -27,10 +37,10 @@ public class Solution361
                 upAndLeft[i][j] = grid[i][j] == 'E' ? 1 : 0;
 
                 if(i > 0)
-                    upAndLeft[i][j] += upAndLeft[i - 1][j];
+                    upAndLeft[i][j] += upAndLeft[i - 1][j] - upAndLeft[i - 1][j - 1];
 
                 if(j > 0)
-                    upAndLeft[i][j] += upAndLeft[i][j - 1];
+                    upAndLeft[i][j] += upAndLeft[i][j - 1] - upAndLeft[i - 1][j - 1];
             }
 
         for (int i = m - 1; i >= 0; i--)
