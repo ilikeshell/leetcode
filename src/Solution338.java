@@ -7,6 +7,20 @@ public class Solution338
         System.out.println(Arrays.toString(new Solution338().countBits(2)));
     }
 
+
+    public int[] countBits3(int num)
+    {
+        int[] ret = new int[num+1];
+        ret[0] = 0;
+        for (int i = 1; i <= num; i++)
+        {
+            // i&1相当于i%２，但前者要快得多；　ｉ＞＞１相当于ｉ／２
+            ret[i] = (i&1) + ret[i>>1];
+        }
+
+        return ret;
+    }
+
     public int[] countBits(int num)
     {
         int[] ret = new int[num + 1];
