@@ -12,7 +12,7 @@ public class Solution1006
         int res = 0;
         int item;
 
-        //先处理N大于4的情况
+        //先处理N大于4的情况，每处理一次，N递减4
         if(N >= 4)
         {
             //一次处理4个数字
