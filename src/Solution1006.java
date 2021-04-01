@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 public class Solution1006
 {
     public static void main(String[] args)
@@ -42,6 +44,35 @@ public class Solution1006
             res = res - item;
         else
             res = item;
+
+        return res;
+    }
+
+
+    /** 用栈的方法实现，但速度较慢 */
+    public int clumsy1(int N)
+    {
+        int op = 0;
+        Stack<Integer> stack = new Stack<>();
+        stack.push(N);
+
+        for (int i = N - 1; i > 0; i--)
+        {
+            if(op == 0)
+                stack.push(stack.pop() * i);
+            else if(op == 1)
+                stack.push(stack.pop() / i);
+            else if(op == 2)
+                stack.push(i);
+            else if(op == 3)
+                stack.push(-i);
+
+            op = (op + 1) % 4;
+        }
+
+        int res = 0;
+        while(!stack.isEmpty())
+            res += stack.pop();
 
         return res;
     }
