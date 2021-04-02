@@ -31,10 +31,11 @@ public class Solution_17_21_LCCI
         for (int i = 2; i < height.length; i++)
         {
             f[i] = f[i - 1];
+            //如果当前位置可以做桶板
             if(height[i] > height[i - 1])
             {
                 int index = i - 1;
-                //向后找一个"桶板"
+                //向左回溯找另一个"桶板"
                 for (int j = i - 2 ; j >=0 ; j--)
                 {
                     //如果找到一个等于或者更长的"桶板"，立即停止
@@ -48,9 +49,9 @@ public class Solution_17_21_LCCI
                         index = j;
                 }
 
+                // 没找到桶板
                 if(index == i - 1)
                 {
-                    // 没找到桶板
                     /** 不能加这条语句， 如{8,2,8,9,0,1,7,7,9}
                      *   f[3]会被置0，
                      *  实际上f[3] == f[2] == 6
@@ -62,6 +63,7 @@ public class Solution_17_21_LCCI
                     // 获取两个桶板之间的短板
                     int hi = Math.min(height[index], height[i]);
                     f[i] = f[index];
+                    //计算"新桶"可装的水量
                     for (int j = index + 1; j < i; j++)
                     {
                         f[i] += hi - height[j];
