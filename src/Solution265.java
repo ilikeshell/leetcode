@@ -83,7 +83,7 @@ class Solution265 {
         int res = Integer.MAX_VALUE;
         for (int j = 0; j < k; j++)
             res = Math.min(f[m - 1][j], res);
-
+        //System.arraycopy();
         return  res;
     }
 }
