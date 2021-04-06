@@ -71,7 +71,6 @@ public class Solution_17_21_LCCI
                 }
             }
         }
-
         return f[height.length - 1];
     }
 }
