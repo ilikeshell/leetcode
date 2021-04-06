@@ -13,7 +13,6 @@ class Solution80
 
         int len = nums.length;
         int currIndex = -1;
-        int moveIndex = 0;
 
         //当前位置之后有3个元素才处理
         while(currIndex + 3 < len)
